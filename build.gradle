@@ -1,0 +1,40 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.7'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'arnekroeger'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.session:spring-session-data-redis'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+
+	// https://mvnrepository.com/artifact/org.keycloak/keycloak-spring-boot-starter
+	implementation group: 'org.keycloak', name: 'keycloak-spring-boot-starter'
+
+
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.keycloak.bom:keycloak-adapter-bom:18.0.0"
+	}
+}
